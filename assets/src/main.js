@@ -52,6 +52,7 @@ if (document.querySelector('#app')) {
 new Vue({
   el: '#app',
   render: h => h(App),
+  router
 })
 }
 

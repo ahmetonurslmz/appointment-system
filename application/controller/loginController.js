@@ -11,7 +11,7 @@ module.exports.loginDo=(req,res) => {
     Users.findOne({email: email}).then(User => {
         bcrypt.compare(password, User.password, function (err, passwordControl) {
             if(passwordControl) {
-                session.sid = User.password
+                session.sid = User._id
                 session.semail = User.email
                 res.json(true)
             } else {
