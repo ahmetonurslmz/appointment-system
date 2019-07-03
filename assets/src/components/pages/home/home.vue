@@ -40,6 +40,30 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                                <label>Date</label>
+                                                <input type="date" v-model="date" class="form-control" placeholder="Phone Number" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <GmapMap
+  v-bind:center="{lat:10, lng:10}"
+  :zoom="7"
+  map-type-id="terrain"
+  style="height: 225px"
+>
+  <GmapMarker
+    v-bind:key="index"
+    v-for="(m, index) in markers"
+    v-bind:position="m.position"
+    v-bind:clickable="true"
+  />
+</GmapMap>
+                                        </div>
+                                    </div>
 
                                     <button @click="createAnAppointment" class="btn btn-info btn-fill pull-right">Create</button>
                                     <div class="clearfix"></div>
@@ -82,19 +106,32 @@
 </div>
 </template>
 <script>
+import {post} from 'axios';
 export default {
+    name: 'Home',
     data() {
         return {
-            name: String,
-            surname: String,
-            email: String,
-            phoneNumber: String
+            name: null,
+            surname: null,
+            email: null,
+            phoneNumber: null,
+            date: null,
+            center: {lat: 10.0,lng: 10.0},
+            markers: [{
+                position: {lat: 10.0,lng: 10.0}}, {
+                    position: {lat: 11.0,lng: 11.0}
+                }
+            ]
         }
     },
     methods: {
         createAnAppointment() {
             const {name,surname,email,phoneNumber} = this;
-            
+            post('/appointment/create', {name,surname,email,phoneNumber}).then(result => {
+                if(result.data==true) {
+
+                }
+            })
         }
     }
 }

@@ -6,10 +6,18 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 
+import * as VueGoogleMaps from 'vue2-google-maps'
+ 
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyDm_7sH1kdehWqYPdKVuoL9xxeDJHNNAmI',
+  }
+})
 
 import App from './App.vue'
 import Routes from './router/router'
 import {store} from './store/store'
+
 
 
 // Middlewares

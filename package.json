@@ -9,8 +9,7 @@
     "build": "webpack -p --watch",
     "watch": "webpack --watch"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "AOS",
   "license": "ISC",
   "dependencies": {
@@ -37,6 +36,7 @@
     "vue-resource": "^1.5.1",
     "vue-router": "^2.8.1",
     "vue-textarea-autosize": "^1.0.4",
+    "vue2-google-maps": "^0.10.6",
     "vuex": "^2.5.0"
   },
   "devDependencies": {

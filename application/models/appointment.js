@@ -1,11 +1,11 @@
 const mongoose=require('mongoose');
-const tableName='users';
+const tableName='appointments';
 const{ObjectId}=mongoose.Schema;
 
 const Schema=mongoose.Schema;
 
 
-const userSchema= new Schema({
+const AppointmentSchema= new Schema({
     name: String,
     surname: String,
     email: String,
@@ -14,11 +14,11 @@ const userSchema= new Schema({
 }, {collection:tableName});
 
 
-let User
+let Appointment
 try {
-  User = mongoose.model(tableName)
+  Appointment = mongoose.model(tableName)
 } catch (error) {
-  User = mongoose.model(tableName, userSchema)
+  Appointment = mongoose.model(tableName, AppointmentSchema)
 }
 
-module.exports=User;
+module.exports=Appointment;
