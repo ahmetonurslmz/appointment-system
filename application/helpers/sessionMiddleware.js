@@ -10,11 +10,11 @@ const variables = (req, res, next) => {
 
 /** USER WHO LOGGED SYSTEM DOES ACCESS */
 const LoggedIn = (req, res, next) =>
-  !req.session.id ? res.redirect('/') : next()
+  !req.session.sid ? res.redirect('/login') : next()
 
 /** USER WHO LOGGED SYSTEM DOES NOT ACCESS */
 const NotLoggedIn = (req, res, next) =>
-  req.session.id ? res.redirect('/home') : next()
+  req.session.sid ? res.redirect('/') : next()
 
 module.exports = {
   variables,

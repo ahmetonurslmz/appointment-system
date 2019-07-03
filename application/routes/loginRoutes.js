@@ -5,5 +5,6 @@ const router=express.Router();
 const loginCtrl=require('../controller/loginController');
 
 router.get('/', mw.NotLoggedIn, loginCtrl.loginPage);
+router.post('/do', mw.NotLoggedIn, loginCtrl.loginDo);
 
 module.exports=router;

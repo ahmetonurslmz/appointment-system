@@ -13,15 +13,50 @@ function EmailValidator(email){
     password=$('#password').val(),
     password2=$('#password2').val()
 
-    $.post("/register/do",
-    {
-        email,
-        password,
-        password2
-    },
-    function(data,status){
-      alert("Data: " + data + "\nStatus: " + status);
-    });
+    if(email && password && password2) {
+      $.post("/register/do",
+      {
+          email,
+          password,
+          password2
+      },
+      function(data,status){
+        if(data=='passwordError') {
+          $('#warning').html('<font color="red">Passwords are not equal.</font>')
+        } else if(data==true) {
+          window.location.href="/";
+        }
+      });
+    } else {
+      $('#warning').html('<font color="red">You must fill blanks </font>')
+    }
+
+
+
+  })
+
+  $('form.form_login').submit(e => {
+    e.preventDefault()
+    let 
+    email=$('#email').val(),
+    password=$('#password').val()
+
+    if(email && password) {
+      $.post("/login/do",
+      {
+          email,
+          password
+      },
+      function(data,status){
+        if(data=='passwordError') {
+          $('#warning').html('<font color="red">Email and password is incompatible.</font>')
+        } else if(data==true) {
+          window.location.href="/";
+        }
+      });
+    } else {
+      $('#warning').html('<font color="red">You must fill blanks </font>')
+    }
 
 
 
