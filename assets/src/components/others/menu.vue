@@ -4,7 +4,7 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a  class="simple-text">
-                    Appoıntment App
+                     Iceberg Estates
                 </a>
             </div>
 

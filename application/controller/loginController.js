@@ -20,3 +20,14 @@ module.exports.loginDo=(req,res) => {
         })
     })
 }
+
+module.exports.sessionUser=(req,res) => {
+    const {session: {sid}} = req;
+    Users.findOne({_id: sid}).then(sessionUser => {
+        if(sessionUser) {
+            res.json(sessionUser)
+        } else {
+            res.json(false);
+        }
+    })
+}

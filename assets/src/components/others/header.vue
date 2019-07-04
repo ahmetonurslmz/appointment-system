@@ -23,3 +23,9 @@
             </div>
         </nav></div>
 </template>
+<script>
+import sessionUser from '../../mixins/session-mixin';
+export default {
+    mixins: [sessionUser]
+}
+</script>

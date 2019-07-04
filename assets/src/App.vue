@@ -12,10 +12,16 @@
 <script>
 import Menu from './components/others/menu.vue';
 import Header from './components/others/header.vue';
+
+import sessionUser from './mixins/session-mixin';
 export default {
+  mixins: [sessionUser],
   components: {
     'app-menu': Menu,
     'app-header': Header
+  },
+  created() {
+      this.$store.dispatch('userDetails')
   }
 }
 </script>

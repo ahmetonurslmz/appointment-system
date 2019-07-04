@@ -2,11 +2,12 @@ const Appointment = require('../models/appointment')
 var getJSON = require('get-json')
 
 module.exports.createAnAppointment=(req,res) => {
-    const {body: {name,surname,email,phoneNumber,dateTime,distance,distanceValue,duration,durationValue,destinationAddress}} = req;
+    const {body: {name,surname,email,phoneNumber,dateTime,distance,distanceValue,duration,durationValue,destinationAddress}, session: {sid}} = req;
     d=new Date(dateTime);
     utc = d.getTime() + (d.getTimezoneOffset() * 60000);
     var now = new Date(utc + (3600000*+6.00));
     const newAppointment=new Appointment({
+        created_by: sid,
         name: name,
         surname: surname,
         email: email,
