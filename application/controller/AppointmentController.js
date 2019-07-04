@@ -2,7 +2,7 @@ const Appointments = require('../models/appointment')
 var getJSON = require('get-json')
 
 module.exports.createAnAppointment=(req,res) => {
-    const {body: {name,surname,email,phoneNumber}} = req;
+    const {body: {name,surname,email,phoneNumber,dateTime,distance,distanceValue,duration,durationValue}} = req;
     console.log(name);
     res.json()
 }

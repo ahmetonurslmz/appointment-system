@@ -74,12 +74,12 @@
                                         </div>
                                     </div>
 
-                                    <button @click="createAnAppointment" class="btn btn-info btn-fill pull-right">Create</button>
+                <button @click="createAnAppointment" v-if="name && surname && email && phoneNumber && dateTime && (starterLatitude!=destinationLatitude || starterLongitude!=destinationLongitude)"  class="btn btn-info btn-fill pull-right">Create</button>
+                <button v-else disabled  class="btn btn-info btn-fill pull-right">Create</button>
+
                                     <div class="clearfix"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
                     </div>
 
                 </div>
@@ -119,8 +119,8 @@ export default {
     },
     methods: {
         createAnAppointment() {
-            const {name,surname,email,phoneNumber,dateTime} = this;
-            post('/appointment/create', {name,surname,email,phoneNumber}).then(result => {
+            const {name,surname,email,phoneNumber,dateTime,distance,distanceValue,duration,durationValue} = this;
+            post('/appointment/create', {name,surname,email,phoneNumber,dateTime,distance,distanceValue,duration,durationValue}).then(result => {
                 if(result.data==true) {
 
                 }
