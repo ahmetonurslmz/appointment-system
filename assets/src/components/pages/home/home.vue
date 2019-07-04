@@ -43,7 +43,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                                 <label>Date</label>
-                                                <input type="date" v-model="date" class="form-control" placeholder="Phone Number" >
+                                                <input type="datetime-local" min="2019-07-04T00:00" v-model="date" class="form-control" placeholder="Phone Number" >
                                         </div>
                                     </div>
 
@@ -131,11 +131,11 @@ export default {
             email: null,
             phoneNumber: null,
             date: null,
-            starter: "Istanbul",
-            starterLongitude: "41.00532444939691",
-            starterLatitude: "28.98134588232415",
-            destinationLongitude: "41.00532444939691",
-            destinationLatitude: "28.98134588232415",
+            starter: "Bakırköy/Istanbul",
+            starterLatitude: "40.997033110617345",
+            starterLongitude: "28.890365352538993",
+            destinationLatitude: "40.997033110617345",
+            destinationLongitude: "28.890365352538993",
             url: null,
             travellingMode: 'driving',
             distance: null,
@@ -154,7 +154,8 @@ export default {
             })
         },
         calculateDistanceDuration() {
-            this.url='https://maps.googleapis.com/maps/api/distancematrix/json?origins='+this.starterLongitude+','+this.starterLatitude+'&destinations='+this.destinationLatitude+','+this.destinationLongitude+'&mode='+this.travellingMode+'&language=tr-TR&key=AIzaSyAgaVOdYz6Yu94hVsOvbyo-3v_t6QsDR1E';
+            if(this.starterLatitude!=this.destinationLatitude || this.starterLongitude!=this.destinationLongitude) {
+            this.url='https://maps.googleapis.com/maps/api/distancematrix/json?origins='+this.starterLatitude+','+this.starterLongitude+'&destinations='+this.destinationLatitude+','+this.destinationLongitude+'&mode='+this.travellingMode+'&language=tr-TR&key=AIzaSyAgaVOdYz6Yu94hVsOvbyo-3v_t6QsDR1E';
             const {url} = this;
             post('/appointment/take', {url}).then(result => {
                 const {data: {distance,duration}} =result;
@@ -167,7 +168,11 @@ export default {
                     this.calculated=false;
                     this.calculateProblem=true;
                 }
-            })
+            })              
+            } else {
+                    this.calculated=false;
+                    this.calculateProblem=true;
+            }
         },
         updateDestinationLongitude(value) {
             this.destinationLongitude=value

@@ -11,8 +11,8 @@ export default {
     return {
       mapName: this.name + "-map",
       markerCoordinates: [{
-        latitude: 29.006429565755298,
-        longitude: 41.005430462874486
+        latitude: "40.997033110617345",
+        longitude: "28.890365352538993"
       }],
       map: null,
       markers: [],
@@ -25,11 +25,11 @@ export default {
     const mapCentre = this.markerCoordinates[0];
     const options = {
       zoom: 12,
-      center: new google.maps.LatLng(mapCentre.longitude, mapCentre.latitude)
+      center: new google.maps.LatLng(mapCentre.latitude, mapCentre.longitude)
     }
     this.map = new google.maps.Map(element, options);
     this.markerCoordinates.forEach((coord) => {
-      const position = new google.maps.LatLng(coord.longitude, coord.latitude);
+      const position = new google.maps.LatLng(coord.latitude, coord.longitude);
       const marker = new google.maps.Marker({ 
         position,
         map: this.map,
@@ -40,11 +40,10 @@ export default {
   },
   methods: {
     updateMarkerPosition() {
-      var t=this;
-      t.destinationLongitude=t.markers[0].position.lng();
-      t.destinationLatitude=t.markers[0].position.lat();
-      this.$emit('destinationLongitude', t.destinationLongitude)
-      this.$emit('destinationLatitude', t.destinationLatitude)
+      this.destinationLongitude=this.markers[0].position.lng();
+      this.destinationLatitude=this.markers[0].position.lat();
+      this.$emit('destinationLongitude', this.destinationLongitude)
+      this.$emit('destinationLatitude', this.destinationLatitude)
     }
   }
 };
