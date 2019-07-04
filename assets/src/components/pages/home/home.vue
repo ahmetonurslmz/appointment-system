@@ -47,21 +47,32 @@
                                         </div>
                                     </div>
 
+                                    <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
+                                        <div class="col-md-6">
+                                                <label>Starter Position</label>
+                                                <input type="text" v-model="starter" disabled class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                                <label>Destination Position</label><br>
+                                                <font size="2">(You can select destination address with dragging marker.)</font>
+                                        </div>
+                                    </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <GmapMap
-  v-bind:center="{lat:10, lng:10}"
-  :zoom="7"
-  map-type-id="terrain"
-  style="height: 225px"
->
-  <GmapMarker
-    v-bind:key="index"
-    v-for="(m, index) in markers"
-    v-bind:position="m.position"
-    v-bind:clickable="true"
-  />
-</GmapMap>
+                                        <div class="col-md-6">
+                                            <button @click="calculateDistanceDuration">Calculate Distance and Duration with driving</button>
+                                        </div>
+                                        <div class="col-md-6" v-if="calculated==true">
+                                            <span>Distance: {{distance}}</span><br>
+                                            <span>Duration: {{duration}}</span>
+                                        </div>
+                                        <div v-if="calculateProblem==true">
+                                            <span style="color: red">You did not drag marker.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-9" >
+                                    <google-map name="example" v-on:destinationLongitude="updateDestinationLongitude"  v-on:destinationLatitude="updateDestinationLatitude"></google-map>
                                         </div>
                                     </div>
 
@@ -107,8 +118,12 @@
 </template>
 <script>
 import {post} from 'axios';
+import GoogleMap from '../../others/GoogleMap.vue';
 export default {
     name: 'Home',
+    components: {
+        'google-map': GoogleMap
+    },
     data() {
         return {
             name: null,
@@ -116,12 +131,17 @@ export default {
             email: null,
             phoneNumber: null,
             date: null,
-            center: {lat: 10.0,lng: 10.0},
-            markers: [{
-                position: {lat: 10.0,lng: 10.0}}, {
-                    position: {lat: 11.0,lng: 11.0}
-                }
-            ]
+            starter: "Istanbul",
+            starterLongitude: "41.00532444939691",
+            starterLatitude: "28.98134588232415",
+            destinationLongitude: "41.00532444939691",
+            destinationLatitude: "28.98134588232415",
+            url: null,
+            travellingMode: 'driving',
+            distance: null,
+            duration: null,
+            calculated: false,
+            calculateProblem: false
         }
     },
     methods: {
@@ -132,6 +152,28 @@ export default {
 
                 }
             })
+        },
+        calculateDistanceDuration() {
+            this.url='https://maps.googleapis.com/maps/api/distancematrix/json?origins='+this.starterLongitude+','+this.starterLatitude+'&destinations='+this.destinationLatitude+','+this.destinationLongitude+'&mode='+this.travellingMode+'&language=tr-TR&key=AIzaSyAgaVOdYz6Yu94hVsOvbyo-3v_t6QsDR1E';
+            const {url} = this;
+            post('/appointment/take', {url}).then(result => {
+                const {data: {distance,duration}} =result;
+                if(distance && duration) {
+                    this.calculateProblem=false;
+                    this.distance=distance.text;
+                    this.duration=duration.text;
+                    this.calculated=true;
+                } else if(result.data==false) {
+                    this.calculated=false;
+                    this.calculateProblem=true;
+                }
+            })
+        },
+        updateDestinationLongitude(value) {
+            this.destinationLongitude=value
+        },
+        updateDestinationLatitude(value) {
+            this.destinationLatitude=value
         }
     }
 }
