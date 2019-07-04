@@ -31,19 +31,17 @@
                                                 <input type="text" v-model="email" class="form-control" placeholder="E-mail Address">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone Number</label>
-                                                <input type="text" v-model="phoneNumber" class="form-control" placeholder="Phone Number" >
+                                                <input type="number" v-model="phoneNumber" class="form-control" placeholder="Phone Number" >
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                                 <label>Date</label>
-                                                <input type="datetime-local" min="2019-07-04T00:00" v-model="date" class="form-control" placeholder="Phone Number" >
+                                                <input type="datetime-local" min="2019-07-04T00:00" v-model="dateTime" class="form-control" placeholder="Phone Number" >
                                         </div>
                                     </div>
 
@@ -66,7 +64,7 @@
                                             <span>Duration: {{duration}}</span>
                                         </div>
                                         <div v-if="calculateProblem==true">
-                                            <span style="color: red">You did not drag marker.</span>
+                                            <span style="color: red">You must drag location marker.</span>
                                         </div>
                                     </div>
 
@@ -82,33 +80,6 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card card-user">
-                            <div class="image">
-                                <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
-                            </div>
-                            <div class="content">
-                                <div class="author">
-                                     <a href="#">
-                                    <img class="avatar border-gray" src="/assets/img/faces/face-3.jpg" alt="..."/>
-
-                                      <h4 class="title">Mike Andrew<br />
-                                         <small>michael24</small>
-                                      </h4>
-                                    </a>
-                                </div>
-                                <p class="description text-center"> "Lamborghini Mercy <br>
-                                                    Your chick she so thirsty <br>
-                                                    I'm in that two seat Lambo"
-                                </p>
-                            </div>
-                            <hr>
-                            <div class="text-center">
-                                <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
-                                <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
-                                <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
-
-                            </div>
-                        </div>
                     </div>
 
                 </div>
@@ -130,7 +101,7 @@ export default {
             surname: null,
             email: null,
             phoneNumber: null,
-            date: null,
+            dateTime: null,
             starter: "Bakırköy/Istanbul",
             starterLatitude: "40.997033110617345",
             starterLongitude: "28.890365352538993",
@@ -140,13 +111,15 @@ export default {
             travellingMode: 'driving',
             distance: null,
             duration: null,
+            distanceValue: null,
+            durationValue: null,
             calculated: false,
             calculateProblem: false
         }
     },
     methods: {
         createAnAppointment() {
-            const {name,surname,email,phoneNumber} = this;
+            const {name,surname,email,phoneNumber,dateTime} = this;
             post('/appointment/create', {name,surname,email,phoneNumber}).then(result => {
                 if(result.data==true) {
 
@@ -162,7 +135,9 @@ export default {
                 if(distance && duration) {
                     this.calculateProblem=false;
                     this.distance=distance.text;
+                    this.distanceValue=distance.value;
                     this.duration=duration.text;
+                    this.durationValue=duration.value;
                     this.calculated=true;
                 } else if(result.data==false) {
                     this.calculated=false;
