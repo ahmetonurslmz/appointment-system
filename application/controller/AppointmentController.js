@@ -1,5 +1,6 @@
-const Appointment = require('../models/appointment')
-var getJSON = require('get-json')
+const Appointment = require('../models/appointment');
+var getJSON = require('get-json');
+const Users = require('../models/users');
 
 module.exports.createAnAppointment=(req,res) => {
     const {body: {name,surname,email,phoneNumber,dateTime,distance,distanceValue,duration,durationValue,destinationAddress}, session: {sid}} = req;
@@ -81,4 +82,18 @@ module.exports.takeData=(req,res) => {
             res.json(false);
         }
     })
+}
+
+module.exports.AppointmentPage=(req,res) => {
+  const {session: {sid}, params: {id}} = req;
+  Users.findOne({_id: sid}).then(sessionUser => {
+      res.render('app', {sessionUser})
+  })
+}
+
+module.exports.getData=(req,res) => {
+  const {body: {a_id}} = req;
+  Appointment.findOne({_id: a_id}).then(data => {
+    data ? res.json(data) : res.json(false);
+  })
 }

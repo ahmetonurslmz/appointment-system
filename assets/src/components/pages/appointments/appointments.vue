@@ -11,20 +11,20 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <th>ID</th>
-                                            <th>Name Surname</th>
+                                            <th>Name</th>
                                             <th>Address</th>
                                             <th>Date</th>
-                                            <th>Time To Go</th>
-                                            <th>Time To Come</th>
+                                            <th>Departure Time</th>
+                                            <th>Return Time</th>
                                         </thead>
                                         <tbody v-if="appointments">
                                             <tr v-for="(one,index) in appointments" v-bind:key="one._id">
-                                                <td>{{index+1}}</td>
-                                                <td>{{one.name+''+one.surname}}</td>
+                                                <td><router-link :to="'/appointment/'+one._id">{{index+1}}</router-link></td>
+                                                <td>{{one.name}}</td>
                                                 <td>{{one.destinationAddress}}</td>
-                                                <td>{{one.dateTime}}</td>
-                                                <td>{{one.timeToGo}}</td>
-                                                <td>{{one.timeToCome}}</td>
+                                                <td>{{one.dateTime | moment('LLLL')}}</td>
+                                                <td>{{one.timeToGo | moment('LLLL') }}</td>
+                                                <td>{{one.timeToCome | moment('LLLL')}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -24,7 +24,7 @@ import {store} from './store/store'
 Vue.use(VueResource);
 Vue.use(VueRouter);
 
-
+require('moment/locale/tr')
 
 const moment = require('moment')
 
@@ -33,6 +33,7 @@ const moment = require('moment')
 Vue.use(require('vue-moment'), {
     moment
 })
+
 
 import moments from 'moment-timezone';
 moments.tz.setDefault('Europe/Istanbul');
