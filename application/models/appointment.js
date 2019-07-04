@@ -9,8 +9,13 @@ const AppointmentSchema= new Schema({
     name: String,
     surname: String,
     email: String,
-    address: String,
-    phone_number: String
+    phone_number: String,
+    dateTime: Date,
+    distanceValue: String,
+    distance: String,
+    duration: String,
+    durationValue: String,
+    destinationAddress: String
 }, {collection:tableName});
 
 

@@ -4,6 +4,7 @@ const routeRegister = require('../routes/registerRoutes');
 const routeHome = require('../routes/homeRoutes');
 const routeLogout = require('../routes/logoutRoutes');
 const routeAppointment = require('../routes/appointmentRoutes');
+const routeAppointments = require('../routes/appointmentsRoutes');
 
 module.exports=(app) => {
   app.use('/login', routeLogin);
@@ -11,4 +12,5 @@ module.exports=(app) => {
   app.use('/', routeHome);
   app.use('/logout', routeLogout);
   app.use('/appointment', routeAppointment);
+  app.use('/appointments', routeAppointments);
   }

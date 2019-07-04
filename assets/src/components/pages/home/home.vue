@@ -52,7 +52,10 @@
                                         </div>
                                         <div class="col-md-6">
                                                 <label>Destination Position</label><br>
-                                                <font size="2">(You can select destination address with dragging marker.)</font>
+                                                <font size="2" v-if="selectingDestination==false">(You can select destination address with dragging marker.)</font>
+                                                <font size="2" v-else>
+                                                    {{destinationAddress}}
+                                                </font>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -114,15 +117,20 @@ export default {
             distanceValue: null,
             durationValue: null,
             calculated: false,
-            calculateProblem: false
+            calculateProblem: false,
+            originAddress: "Osmaniye, İBB-Çırpıcı Çayırı Parkı, Çırpıcı Koşuyolu Sk. No:49, 34146 Bakırköy/İstanbul, Türkiye",
+            selectingDestination: false,
+            destinationAddress: null
+
         }
     },
     methods: {
         createAnAppointment() {
-            const {name,surname,email,phoneNumber,dateTime,distance,distanceValue,duration,durationValue} = this;
-            post('/appointment/create', {name,surname,email,phoneNumber,dateTime,distance,distanceValue,duration,durationValue}).then(result => {
+            const {name,surname,email,phoneNumber,dateTime,distance,distanceValue,duration,durationValue,destinationAddress} = this;
+            post('/appointment/create', {name,surname,email,phoneNumber,dateTime,distance,distanceValue,duration,durationValue,destinationAddress}).then(result => {
                 if(result.data==true) {
-
+                    alert('Appointment was created.');
+                    window.location.href="/appointments";
                 }
             })
         },
@@ -138,6 +146,8 @@ export default {
                     this.distanceValue=distance.value;
                     this.duration=duration.text;
                     this.durationValue=duration.value;
+                    this.destinationAddress=result.data.destinationAddress;
+                    this.selectingDestination=true;
                     this.calculated=true;
                 } else if(result.data==false) {
                     this.calculated=false;
@@ -150,10 +160,10 @@ export default {
             }
         },
         updateDestinationLongitude(value) {
-            this.destinationLongitude=value
+            this.destinationLongitude=value;
         },
         updateDestinationLatitude(value) {
-            this.destinationLatitude=value
+            this.destinationLatitude=value;
         }
     }
 }
