@@ -16,7 +16,9 @@ const AppointmentSchema= new Schema({
     distance: String,
     duration: String,
     durationValue: String,
-    destinationAddress: String
+    destinationAddress: String,
+    timeToGo: Date,
+    timeToCome: Date
 }, {collection:tableName});
 
 

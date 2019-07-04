@@ -7,10 +7,10 @@ module.exports.AppointmentsPage=(req,res) => {
         res.render('app', {sessionUser})
     })
 }
+const moment = require('moment')
 module.exports.getData=(req,res) => {
     const {session: {sid}} = req;
     Appointments.find({created_by: sid}).then(result => {
-        console.log(result)
         res.json(result)
     })
 }
