@@ -2,15 +2,15 @@
 npm run start
 
 ## Technologies
-Back-end: NodeJS,
-Front-end: VueJS,
-Database: MongoDB - NoSQL
+Back-end: NodeJS<br>
+Front-end: VueJS<br>
+Database: MongoDB - NoSQL<br>
 
-External:
-VueRouter,
-Vuex,
-Component Structure,
-Moment,
+External:<br>
+-VueRouter<br>
+-Vuex<br>
+-Component Structure<br>
+-Moment<br>
 
 ### Usage
 You must create an account to create an appointment and view your appointments.<br>
