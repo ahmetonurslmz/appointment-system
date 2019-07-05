@@ -1,7 +1,7 @@
 # Run
 npm run start
 
-# Technologies
+## Technologies
 Back-end: NodeJS,
 Front-end: VueJS,
 Database: MongoDB - NoSQL
@@ -12,7 +12,7 @@ Vuex,
 Component Structure,
 Moment,
 
-#Usage
+### Usage
 You must create an account to create an appointment and view your appointments.<br>
 After creating account, you can create an appointment.<br>
 Name, Surname, Email, Phone number, Date, Destination position(from google map). <br>
