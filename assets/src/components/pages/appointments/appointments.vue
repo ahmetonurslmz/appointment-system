@@ -9,19 +9,34 @@
                                 </div>
                                 <div class="row" style="margin-bottom: 25px;"> 
                                     <div class="col-sm-2">
+                                        <label>User</label><br>
                                         <select v-model="FilterUser">
                                         <option v-for="one in appointments" v-bind:key="one._id" :value="one.email">{{one.name}}</option>
                                         </select>
                                     </div>
                                 
-                                <div class="col-sm-2"><input type="text" v-model="FilterDistance"></div>
-                                <div class="col-sm-2"><select v-model="FilterDistanceType">
+                                <div class="col-sm-2">
+                                <label>Dıstance(km):</label><br> 
+                                <input type="text" v-model="FilterDistance">
+                                </div>
+                                <div class="col-sm-2">
+                                <label>Dıstance Type:</label><br>
+                                    <select v-model="FilterDistanceType">
                                         <option value="higher">Higher</option>
                                         <option value="equal">Equal</option>
                                         <option value="smaller">Smaller</option>
-                                        </select></div>
-                                <div class="col-sm-3"><input type="datetime-local" v-model="FilterDate"></div>
-                                <div class="col-sm-2"><button @click="DoFilter">Filter</button></div>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Date</label><br>
+                                <input type="datetime-local" v-model="FilterDate">
+                                </div>
+                                <div class="col-sm-1">
+                                    <button @click="DoFilter">Filter</button>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button @click="ClearFilter">Clear</button>
+                                </div>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
                                     <table class="table table-hover">
@@ -115,6 +130,9 @@ export default {
                         }
                     Filtering();
             }
+        },
+        ClearFilter() {
+            this.listAppoinments=this.appointments
         }
     }
 }
