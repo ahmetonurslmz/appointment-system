@@ -1,5 +1,5 @@
 # Run
-npm run start
+node app.js
 
 ## Technologies
 Back-end: NodeJS<br>
