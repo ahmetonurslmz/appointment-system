@@ -18,10 +18,7 @@ app.set('view engine','ejs');
 app.set('views',path.join(__dirname, '/application/views'));
 
 
-// Middlewares
-/*app.use(favicon(
-  path.join(__dirname, '/assets/images/favicon/favicon.ico')
-))*/
+
 //We have to put bodyParser function on top of routeManager.
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
