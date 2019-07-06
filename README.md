@@ -15,13 +15,17 @@ External:<br>
 ### Settings
 Google Map API: <br>
 Go application/views/app.ejs's footer.<br> 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=API_KEY"></script><br>
+..key=API_KEY<br>
 Write your key instead of API_KEY.
 
 Google Map Distance Matrix API: <br>
 NOTE: (If you do not restrict your key, you can same API key in two place.)<br>
 Go assets/src/components/pages/home/home.vue<br>
 Write your key instead of calculateDistanceDuration method's this.url function's API_KEY.
+
+Mongo DB Connection:<br>
+Go .env file.<br>
+Paste your MongoDB Connection URL instead of MONGO_CONNECTİON_URL.
 
 #### Usage
 You must create an account to create an appointment and view your appointments.<br>
