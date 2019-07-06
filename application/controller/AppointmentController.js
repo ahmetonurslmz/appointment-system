@@ -74,6 +74,7 @@ module.exports.createAnAppointment=(req,res) => {
 module.exports.takeData=(req,res) => {
     const {body: {url}} = req;
     getJSON(url).then(data => {
+      if(data.status=="OK") {
         const {distance,duration} = data.rows[0].elements[0];
         if(distance && duration) {
             const destinationAddress = data.destination_addresses[0];
@@ -81,6 +82,9 @@ module.exports.takeData=(req,res) => {
         } else {
             res.json(false);
         }
+      } else {
+        res.json(false);
+      }
     })
 }
 

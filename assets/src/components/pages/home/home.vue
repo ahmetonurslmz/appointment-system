@@ -135,8 +135,8 @@ export default {
             })
         },
         calculateDistanceDuration() {
-            if(this.starterLatitude!=this.destinationLatitude || this.starterLongitude!=this.destinationLongitude) {
-            this.url='https://maps.googleapis.com/maps/api/distancematrix/json?origins='+this.starterLatitude+','+this.starterLongitude+'&destinations='+this.destinationLatitude+','+this.destinationLongitude+'&mode='+this.travellingMode+'&language=tr-TR&key=AIzaSyAgaVOdYz6Yu94hVsOvbyo-3v_t6QsDR1E';
+            if((this.starterLatitude!=this.destinationLatitude) || (this.starterLongitude!=this.destinationLongitude)) {
+            this.url='https://maps.googleapis.com/maps/api/distancematrix/json?origins='+this.starterLatitude+','+this.starterLongitude+'&destinations='+this.destinationLatitude+','+this.destinationLongitude+'&mode='+this.travellingMode+'&language=tr-TR&key=API_KEY';
             const {url} = this;
             post('/appointment/take', {url}).then(result => {
                 const {data: {distance,duration}} =result;
@@ -151,7 +151,8 @@ export default {
                     this.calculated=true;
                 } else if(result.data==false) {
                     this.calculated=false;
-                    this.calculateProblem=true;
+                    this.calculateProblem=false;
+                    alert('Data was not fetched from Google MAP API.')
                 }
             })              
             } else {

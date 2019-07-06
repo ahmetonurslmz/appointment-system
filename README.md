@@ -12,7 +12,18 @@ External:<br>
 -Component Structure<br>
 -Moment<br>
 
-### Usage
+### Settings
+Google Map API: <br>
+Go application/views/app.ejs's footer.<br> 
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=API_KEY"></script><br>
+Write your key instead of API_KEY.
+
+Google Map Distance Matrix API: <br>
+NOTE: (If you do not restrict your key, you can same API key in two place.)<br>
+Go assets/src/components/pages/home/home.vue<br>
+Write your key instead of calculateDistanceDuration method's this.url function's API_KEY.
+
+#### Usage
 You must create an account to create an appointment and view your appointments.<br>
 After creating account, you can create an appointment.<br>
 Name, Surname, Email, Phone number, Date, Destination position(from google map). <br>
