@@ -25,7 +25,7 @@ Write your key instead of calculateDistanceDuration method's this.url function's
 
 Mongo DB Connection:<br>
 Go .env file.<br>
-Paste your MongoDB Connection URL instead of MONGO_CONNECTİON_URL.
+Paste your MongoDB Connection URL instead of MONGO_CONNECTION_URL.
 
 #### Usage
 You must create an account to create an appointment and view your appointments.<br>
