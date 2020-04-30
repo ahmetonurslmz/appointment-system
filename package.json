@@ -28,7 +28,7 @@
     "handy-log": "^1.0.3",
     "handy-notification": "^1.2.8",
     "handy-timeago": "^1.0.2",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.25",
     "mongoose": "^5.4.18",
